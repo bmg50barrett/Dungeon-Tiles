@@ -7,9 +7,11 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 | File | What it is |
 |---|---|
 | `pdf/Dungeon Tiles - Full Set.pdf` | The full set: 6 letter-size sheets |
+| `pdf/Dungeon Tiles - Cut Guide.pdf` | A matching page for each sheet showing every tile's outline and name, with numbered cuts |
 | `pdf/Dungeon Tiles - Line Art Test Sheet.pdf` | One sheet with one of each tile type. Print this first to check scale and contrast |
 | `src/lineart.py` | Draws the tiles (and builds the test sheet when run on its own) |
 | `src/full_set.py` | Lays the full set out across the sheets |
+| `src/cut_guide.py` | Builds the cut guide from the same layout |
 
 ## Printing
 
@@ -23,7 +25,8 @@ These are designed to print best this way:
 ## Laminating and cutting
 
 1. Laminate the whole sheet first.
-2. Cut along the thin gray lines with a paper trimmer. The tiles butt up against each other, so one cut separates two tiles.
+2. Open the cut guide page for that sheet. Trim the four margins (marked T), then make the numbered cuts in order. Every cut runs straight across the piece you're holding, so a paper trimmer works for all of them.
+3. The cuts follow the thin gray lines on the tiles. The tiles butt up against each other, so one cut separates two tiles.
 
 Cutting first and laminating each tile separately also works, but it takes longer and the edges come out less even. Laminated tiles take wet-erase and dry-erase markers.
 
@@ -60,6 +63,7 @@ The tiles are drawn as vector art with Python and ReportLab. Random details like
 ```
 pip install -r requirements.txt
 python src/full_set.py    # writes pdf/Dungeon Tiles - Full Set.pdf
+python src/cut_guide.py   # writes pdf/Dungeon Tiles - Cut Guide.pdf
 python src/lineart.py     # writes pdf/Dungeon Tiles - Line Art Test Sheet.pdf
 ```
 

@@ -71,14 +71,14 @@ COLS, ROWS = 4, 5
 pages = []
 
 def place(cw, ch):
-    for p in pages:
+    for pi, p in enumerate(pages):
         for r in range(ROWS - ch + 1):
             for col in range(COLS - cw + 1):
                 if all(not p[rr][cc] for rr in range(r, r + ch) for cc in range(col, col + cw)):
                     for rr in range(r, r + ch):
                         for cc in range(col, col + cw):
                             p[rr][cc] = True
-                    return pages.index(p), col, r
+                    return pi, col, r
     pages.append([[False] * COLS for _ in range(ROWS)])
     return place(cw, ch)
 
@@ -101,19 +101,20 @@ for pi, p in enumerate(pages):
                 placed.append((pi, col, r, item))
                 extra += 1
 
-out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pdf', 'Dungeon Tiles - Full Set.pdf')
-c = canvas.Canvas(out, pagesize=(PAGE_W * inch, PAGE_H * inch))
-c.setTitle('Dungeon Tiles - Full Set')
-seed = 1000
-counts = {}
-for pi in range(len(pages)):
-    header(c, f"Sheet {pi + 1} of {len(pages)}")
-    for (pj, col, r, (name, f)) in placed:
-        if pj == pi:
-            f(c, col * 2, r * 2, seed)
-            seed += 17
-            counts[name] = counts.get(name, 0) + 1
-    c.showPage()
-c.save()
-print(len(pages), 'pages; extras', extra)
-print(counts)
+if __name__ == '__main__':
+    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pdf', 'Dungeon Tiles - Full Set.pdf')
+    c = canvas.Canvas(out, pagesize=(PAGE_W * inch, PAGE_H * inch))
+    c.setTitle('Dungeon Tiles - Full Set')
+    seed = 1000
+    counts = {}
+    for pi in range(len(pages)):
+        header(c, f"Sheet {pi + 1} of {len(pages)}")
+        for (pj, col, r, (name, f)) in placed:
+            if pj == pi:
+                f(c, col * 2, r * 2, seed)
+                seed += 17
+                counts[name] = counts.get(name, 0) + 1
+        c.showPage()
+    c.save()
+    print(len(pages), 'pages; extras', extra)
+    print(counts)
