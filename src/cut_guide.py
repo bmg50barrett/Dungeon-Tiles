@@ -5,14 +5,14 @@ import os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
-from lineart import PAGE_W, PAGE_H, OX, OY
-import full_set as fs
+from lineart import PAGE_W, PAGE_H, OX, OY, header
+import modular_set as fs
 
 LABELS = {
     'floor4x4': 'Floor 4x4', 'corridor2x4': 'Corridor 2x4', 'edge2x4': 'Room edge 2x4',
     'floor2x4': 'Floor 2x4', 'stairs': 'Stairs', 'straight': 'Corridor', 'corner': 'Corner',
     'tee': 'T-junction', 'cross': 'Crossroads', 'dead': 'Dead end', 'outer': 'Outer corner',
-    'edge': 'Room edge', 'inner': 'Inner corner', 'floor2x2': 'Floor 2x2', 'spikepit': 'Spiked pit',
+    'edge': 'Room edge', 'inner': 'Inner corner', 'doorway': 'Doorway edge', 'floor2x2': 'Floor 2x2', 'spikepit': 'Spiked pit',
     'pit': 'Pit', 'collapsed': 'Collapsed', 'pit1': 'Pit', 'ladder': 'Ladder',
     'trapdoor': 'Trapdoor', 'spiral': 'Spiral', 'door': 'Door',
 }
@@ -26,7 +26,7 @@ def pieces_for_page(pi):
     mini_i = door_i = 0
     minis_groups = [fs.minis[i:i + 4] for i in range(0, len(fs.minis), 4)]
     door_groups = [fs.doors[i:i + 4] for i in range(0, len(fs.doors), 4)]
-    # count blocks in placement order across all pages so groups line up with full_set
+    # count blocks in placement order across all pages so groups line up with modular_set
     for (pj, col, r, (name, f)) in fs.placed:
         x, y = col * 2, r * 2
         if name == 'minis':
@@ -88,19 +88,15 @@ def P(u, v):
 
 
 def draw_page(c, pi, n_pages):
-    return draw_guide(c, f"Cut Guide  |  Sheet {pi + 1} of {n_pages}", pieces_for_page(pi))
+    return draw_guide(c, f"Modular Set Cut Guide  |  Sheet {pi + 1} of {n_pages}", pieces_for_page(pi))
 
 
 def draw_guide(c, title, pcs):
     xs = [p[0] + p[2] for p in pcs]; ys = [p[1] + p[3] for p in pcs]
     W, H = max(xs), max(ys)
-    # header
-    c.setFillGray(0); c.setFont('Helvetica-Bold', 11)
-    c.drawString(0.3 * inch, (PAGE_H - 0.45) * inch, title)
-    c.setFont('Helvetica', 7.5)
-    c.drawString(0.3 * inch, (PAGE_H - 0.62) * inch,
-                 "Laminate the sheet first. Trim the margins (T), then cut in number order. "
-                 "Every cut runs all the way across the piece you are holding.")
+    # header with calibration ruler
+    header(c, title, "Laminate first. Trim the margins (T), then cut in number order. "
+                     "Each cut runs across the piece you are holding.")
     # tile outlines and names
     c.setStrokeGray(0.6); c.setLineWidth(0.5)
     for (x, y, w, h, lab) in pcs:
@@ -147,9 +143,9 @@ def label(c, u, v, text):
 
 
 if __name__ == '__main__':
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pdf', 'Dungeon Tiles - Cut Guide.pdf')
+    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pdf', 'Dungeon Tiles - Modular Set Cut Guide.pdf')
     c = canvas.Canvas(out, pagesize=(PAGE_W * inch, PAGE_H * inch))
-    c.setTitle('Dungeon Tiles - Cut Guide')
+    c.setTitle('Dungeon Tiles - Modular Set Cut Guide')
     n = len(fs.pages)
     for pi in range(n):
         k = draw_page(c, pi, n)

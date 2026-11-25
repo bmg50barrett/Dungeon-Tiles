@@ -68,15 +68,13 @@ if __name__ == '__main__':
             floor(c, x, y, w, h, fw, seed); seed += 13
         c.showPage()
         # back: mirrored left to right for a long-edge flip
-        c.setFillGray(0); c.setFont('Helvetica-Bold', 11)
-        c.drawString(0.3 * inch, (PAGE_H - 0.45) * inch, f"Dungeon Tiles  |  Full Rooms, Double-Sided  |  Sheet {i + 1} BACK")
-        c.setFont('Helvetica', 7.5)
-        c.drawString(0.3 * inch, (PAGE_H - 0.62) * inch, "Back side. Print duplex, flip on long edge.")
+        header(c, f"Full Rooms, Double-Sided  |  Sheet {i + 1} BACK",
+               "Back side. Print duplex, flip on long edge. The ruler must measure exactly 2 inches.")
         for x, y, (w, h, fw, bw, _, _) in sheet:
             floor(c, 8 - x - w, y, w, h, bw, seed); seed += 13
         c.showPage()
         pcs = [(x, y, p[0], p[1], f"{p[4]}  /  {p[5]}") for x, y, p in sheet]
-        k = cg.draw_guide(g, f"Full Rooms, Double-Sided, Cut Guide  |  Sheet {i + 1} (front side up)", pcs)
+        k = cg.draw_guide(g, f"Double-Sided Rooms Cut Guide  |  Sheet {i + 1}, front up", pcs)
         print(f"   {len(pcs)} pieces, {k} cuts")
         g.showPage()
     c.save(); g.save()

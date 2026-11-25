@@ -1,6 +1,6 @@
 """Line-art dungeon tiles, vector, for printing on gray cardstock.
 1 square = 1 inch = 5 ft. Floors are left unprinted (paper color)."""
-import math, os, random
+import math, random
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 
@@ -339,14 +339,17 @@ def spiral(c, x, y, seed):
     t.cut_line()
 
 
-# ======================================================================= test sheet
-def header(c, title):
+# ======================================================================= page header
+CAL_NOTE = "Print at 100% / Actual Size. The ruler must measure exactly 2 inches, and each grid square 1 inch."
+
+
+def header(c, title, note=CAL_NOTE):
+    """Title, one line of notes, and a 2 inch calibration ruler at top right."""
     c.setFillGray(0)
     c.setFont('Helvetica-Bold', 11)
     c.drawString(0.3 * inch, (PAGE_H - 0.45) * inch, f"Dungeon Tiles  |  {title}")
     c.setFont('Helvetica', 7.5)
-    c.drawString(0.3 * inch, (PAGE_H - 0.62) * inch,
-                 "Print at 100% / Actual Size. The ruler must measure exactly 2 inches, and each grid square 1 inch.")
+    c.drawString(0.3 * inch, (PAGE_H - 0.62) * inch, note)
     rx, ry = 6.15 * inch, (PAGE_H - 0.52) * inch
     c.setLineWidth(0.8); c.setStrokeGray(0)
     c.line(rx, ry, rx + 2 * inch, ry)
@@ -356,30 +359,3 @@ def header(c, title):
     c.setFont('Helvetica', 6)
     for i in range(3):
         c.drawCentredString(rx + i * inch, ry - 0.1 * inch, f"{i}\"")
-
-
-if __name__ == '__main__':
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pdf', 'Dungeon Tiles - Line Art Test Sheet.pdf')
-    c = canvas.Canvas(out, pagesize=(PAGE_W * inch, PAGE_H * inch))
-    c.setTitle('Dungeon Tiles - Line Art Test Sheet')
-    header(c, 'Line Art Test Sheet')
-    floor(c, 0, 0, 2, 4, [(0, 0, T, 4), (2 - T, 0, T, 4)], 1)
-    floor(c, 2, 0, 2, 2, [(0, 0, 2, T), (0, T, T, 2 - T), (2 - T, 2 - T, T, T)], 2)
-    floor(c, 4, 0, 2, 2, [(0, 0, 2, T), (0, 2 - T, T, T), (2 - T, 2 - T, T, T)], 3)
-    floor(c, 6, 0, 2, 2, [(0, 0, T, T), (2 - T, 0, T, T), (0, 2 - T, T, T), (2 - T, 2 - T, T, T)], 4)
-    floor(c, 2, 2, 2, 2, [(0, 0, 2, T), (0, T, T, 2 - T), (2 - T, T, T, 2 - T)], 5)
-    floor(c, 4, 2, 2, 2, [(0, 0, 2, T), (0, T, T, 2 - T)], 6)
-    floor(c, 6, 2, 2, 2, [(0, 0, 2, T)], 7)
-    floor(c, 0, 4, 4, 4, [], 8)
-    stairs(c, 4, 4, 9)
-    pit(c, 6, 4, 10, spikes=True)
-    collapsed(c, 6, 6, 11)
-    for i, k in enumerate(['wood', 'locked', 'iron', 'portcullis', 'secret', 'broken', 'arch', 'sealed']):
-        door(c, (i % 2) * 2, 8 + (i // 2) * 0.5, k, 20 + i)
-    ladder(c, 4, 8, 13)
-    trapdoor(c, 5, 8, 14)
-    spiral(c, 4, 9, 15)
-    pit(c, 5, 9, 16, w=1, h=1)
-    floor(c, 6, 8, 2, 2, [(2 - T, 2 - T, T, T)], 12)
-    c.save()
-    print('ok')

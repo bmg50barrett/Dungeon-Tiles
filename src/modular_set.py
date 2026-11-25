@@ -17,6 +17,8 @@ W = {
     'edge': [(0, 0, 2, T)],
     'edge4': [(0, 0, T, 4)],
     'inner': [(2 - T, 2 - T, T, T)],
+    # room edge with a 10 ft opening: wall stubs match a corridor's walls
+    'doorway': [(0, 0, T, T), (2 - T, 0, T, T)],
 }
 
 big, tall, small, minis, doors = [], [], [], [], []
@@ -90,25 +92,28 @@ for item in tall:
 for item in small:
     placed.append((*place(1, 1), item))
 
-# fill leftover cells with extra plain floors and room edges
+# fill leftover cells: doorway edges first, then extra plain floors and room edges
+FILL = (['doorway', 'floor2x2', 'edge'] * 4 + ['doorway', 'doorway', 'floor2x2'])
+FILLERS = {'doorway': fl(W['doorway']), 'floor2x2': fl([]), 'edge': fl(W['edge'])}
 extra = 0
 for pi, p in enumerate(pages):
     for r in range(ROWS):
         for col in range(COLS):
             if not p[r][col]:
                 p[r][col] = True
-                item = ('floor2x2', fl([])) if extra % 2 == 0 else ('edge', fl(W['edge']))
+                k = FILL[extra]
+                item = (k, FILLERS[k])
                 placed.append((pi, col, r, item))
                 extra += 1
 
 if __name__ == '__main__':
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pdf', 'Dungeon Tiles - Full Set.pdf')
+    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'pdf', 'Dungeon Tiles - Modular Set.pdf')
     c = canvas.Canvas(out, pagesize=(PAGE_W * inch, PAGE_H * inch))
-    c.setTitle('Dungeon Tiles - Full Set')
+    c.setTitle('Dungeon Tiles - Modular Set')
     seed = 1000
     counts = {}
     for pi in range(len(pages)):
-        header(c, f"Sheet {pi + 1} of {len(pages)}")
+        header(c, f"Modular Set  |  Sheet {pi + 1} of {len(pages)}")
         for (pj, col, r, (name, f)) in placed:
             if pj == pi:
                 f(c, col * 2, r * 2, seed)

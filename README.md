@@ -6,15 +6,14 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 
 | File | What it is |
 |---|---|
-| `pdf/Dungeon Tiles - Full Set.pdf` | The full set: 6 letter-size sheets |
-| `pdf/Dungeon Tiles - Cut Guide.pdf` | A matching page for each sheet showing every tile's outline and name, with numbered cuts |
+| `pdf/Dungeon Tiles - Modular Set.pdf` | Build-your-own pieces: corridors, room walls, corners and floors to make a room of any size, plus stairs, pits and doors (6 sheets) |
+| `pdf/Dungeon Tiles - Modular Set Cut Guide.pdf` | Cut guide for the Modular Set: a matching page for each sheet showing every tile's outline and name, with numbered cuts |
 | `pdf/Dungeon Tiles - Full Rooms.pdf` | Ready-made 4x4 and 5x5 rooms in every door layout, with spare space filled by 5 ft and 10 ft hallways (4 sheets, single-sided) |
 | `pdf/Dungeon Tiles - Full Rooms Cut Guide.pdf` | Cut guide for Full Rooms |
 | `pdf/Dungeon Tiles - Full Rooms Double-Sided.pdf` | The same rooms printed front and back, with a different door layout on each side (3 sheets, 6 pages) |
 | `pdf/Dungeon Tiles - Full Rooms Double-Sided Cut Guide.pdf` | Cut guide for the double-sided rooms, showing both faces of each piece |
-| `pdf/Dungeon Tiles - Line Art Test Sheet.pdf` | One sheet with one of each tile type. Print this first to check scale and contrast |
-| `src/lineart.py` | Draws the tiles (and builds the test sheet when run on its own) |
-| `src/full_set.py` | Lays the full set out across the sheets |
+| `src/lineart.py` | Draws the tiles and the page header with its calibration ruler |
+| `src/modular_set.py` | Lays the Modular Set out across the sheets |
 | `src/cut_guide.py` | Builds the cut guide from the same layout |
 | `src/rooms.py` | Builds Full Rooms and its cut guide |
 | `src/rooms_duplex.py` | Builds the double-sided rooms and their cut guide |
@@ -26,7 +25,7 @@ These are designed to print best this way:
 - **Print at 100% / Actual Size.** Turn off "Fit to page", "Shrink oversized pages" and any other scaling in the print dialog. Even a few percent of shrink makes long corridors drift off the mat grid.
 - **Use heavy gray cardstock.** The floors are left unprinted, so the gray paper becomes the stone floor. White stock works too, but the tiles look flatter.
 - **Letter paper (8.5 x 11).** The tiles fill an 8 x 10 inch area with a 0.25 inch margin, which fits printers that can't print to the edge.
-- **Check the ruler.** Every sheet has a 2 inch ruler in the top right corner. Measure it before printing the rest. If it isn't exactly 2 inches, your printer is scaling the page.
+- **Check the ruler.** Every page, including the cut guides and the back pages, has a 2 inch ruler in the top right corner. Print any one page first and measure it. If it isn't exactly 2 inches, your printer is scaling the page.
 
 ## Laminating and cutting
 
@@ -36,16 +35,18 @@ These are designed to print best this way:
 
 Cutting first and laminating each tile separately also works, but it takes longer and the edges come out less even. Laminated tiles take wet-erase and dry-erase markers.
 
-## The full set
+## The Modular Set
+
+The Modular Set gives you walls, corners, floors and corridors to build a room of any size or shape yourself. For the common 4x4 and 5x5 rooms, Full Rooms below has them ready-made.
 
 | Group | Pieces |
 |---|---|
 | Corridors (10 ft wide) | 6 straight 2x4, 4 straight 2x2, 4 corners, 3 T-junctions, 2 crossroads, 2 dead ends |
-| Rooms | 8 outer corners, 15 edges 2x2, 6 edges 2x4, 4 inner corners, 4 floors 4x4, 4 floors 2x4, 14 floors 2x2 |
+| Rooms | 8 outer corners, 12 edges 2x2, 6 doorway edges, 6 edges 2x4, 4 inner corners, 4 floors 4x4, 4 floors 2x4, 11 floors 2x2 |
 | Stairs and pits | 2 stairs, 1 spiked pit, 1 open pit, 2 collapsed floors, 2 small pits, 2 ladders, 2 trapdoors, 2 spiral stairs |
 | Doors | 7 wooden, 3 locked, 2 iron, 2 portcullis, 4 secret, 2 broken, 2 archway, 2 sealed |
 
-That's 74 tiles plus 24 door strips, enough for a dungeon about 4 by 6 feet on the table.
+That's 74 tiles plus 24 door strips, enough for a dungeon about 4 by 6 feet on the table. The pieces take up a bit less than 6 sheets, so the spare spaces on sheet 6 hold the doorway edges and some extra plain floors and room edges (all counted above).
 
 ## Full Rooms
 
@@ -69,17 +70,21 @@ The double-sided file puts a different room on the back of each piece to save ca
 
 - **Walls are drawn inside the tile edge**, 0.15 inch thick. This keeps every tile on the grid. The tradeoff is that squares along a wall lose a thin strip of floor, though a 1 inch mini base still fits.
 - **Corridors and rooms share one system.** Build a room from outer corners, edges and plain floors. Use the inner corner piece (a small wall post) where a room turns an L-shaped corner.
-- **To join a corridor to a room,** put a plain floor piece in the room's wall where you'd normally put an edge piece. Note that this leaves an opening 0.3 inch wider than the corridor floor, so the walls don't quite meet. The Full Rooms pieces have properly sized doorways.
+- **To join a corridor to a room,** put a doorway edge in the room's wall where you'd normally put an edge piece. It has a short wall stub at each end, so the opening is exactly as wide as the corridor floor and the walls line up. A 10 ft door strip fits across it.
 - **Doors are 2 x 0.5 inch strips** that lie across a 10 foot opening, centered on the joint between two tiles.
 - **Stairs work both ways.** The step lines bunch together at the low end. Turn the tile around to make them go up instead of down.
 
 ## Known gaps
 
-- The modular full set only has 10 foot corridors. 5 foot hallways come only in the Full Rooms files.
+- The Modular Set only has 10 foot corridors. 5 foot hallways come only in the Full Rooms files.
 - There are no natural cave pieces or furniture (tables, chests, altars and so on).
-- The modular full set has no doorway edge piece yet, so a corridor joining a room built from edge pieces won't have its walls line up exactly.
 - Door strips only fit 10 foot openings. There are no strips yet for the 5 foot doorways on the 5x5 rooms.
-- The pieces above take up a bit less than 6 sheets, so the leftover spaces are filled with extra plain floors and room edges (already counted in the table).
+- Each room size only connects to one hallway width. 4x4 rooms have 10 foot doorways and 5x5 rooms have 5 foot doorways, so a 5 foot hall meeting a 4x4 room (or a 10 foot hall meeting a 5x5 room) won't line up.
+- There's no piece that narrows a 10 foot corridor down to a 5 foot hallway.
+- The Modular Set's doorway edge only fits 10 foot corridors. There's no 5 foot version.
+- Stairs only come 10 feet wide.
+- There are only a few 5 foot corners, T-junctions, crossroads and dead ends, so a twisty 5 foot maze will run out quickly.
+- Everything runs square to the grid. There are no diagonal corridors.
 
 ## Rebuilding the PDFs
 
@@ -87,11 +92,10 @@ The tiles are drawn as vector art with Python and ReportLab. Random details like
 
 ```
 pip install -r requirements.txt
-python src/full_set.py    # writes pdf/Dungeon Tiles - Full Set.pdf
-python src/cut_guide.py   # writes pdf/Dungeon Tiles - Cut Guide.pdf
+python src/modular_set.py  # writes pdf/Dungeon Tiles - Modular Set.pdf
+python src/cut_guide.py    # writes pdf/Dungeon Tiles - Modular Set Cut Guide.pdf
 python src/rooms.py       # writes Full Rooms and its cut guide
 python src/rooms_duplex.py  # writes the double-sided rooms and their cut guide
-python src/lineart.py     # writes pdf/Dungeon Tiles - Line Art Test Sheet.pdf
 ```
 
-To change how many of each piece you get, edit the `add(...)` lines and the door counts near the top of `src/full_set.py`.
+To change how many of each piece you get, edit the `add(...)` lines and the door counts near the top of `src/modular_set.py`.
