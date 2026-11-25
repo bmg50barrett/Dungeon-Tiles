@@ -12,6 +12,8 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 | `pdf/Dungeon Tiles - Full Rooms Cut Guide.pdf` | Cut guide for Full Rooms |
 | `pdf/Dungeon Tiles - Full Rooms Double-Sided.pdf` | The same rooms printed front and back, with a different door layout on each side (3 sheets, 6 pages) |
 | `pdf/Dungeon Tiles - Full Rooms Double-Sided Cut Guide.pdf` | Cut guide for the double-sided rooms, showing both faces of each piece |
+| `catalog/tiles.json` | Machine-readable list of every tile design and physical piece in the Full Rooms files, for tools like a dungeon generator's bill of materials. See `catalog/README.md` |
+| `src/catalog.py` | Builds `catalog/tiles.json` from the room definitions |
 | `src/lineart.py` | Draws the tiles and the page header with its calibration ruler |
 | `src/modular_set.py` | Lays the Modular Set out across the sheets |
 | `src/cut_guide.py` | Builds the cut guide from the same layout |
@@ -96,6 +98,7 @@ python src/modular_set.py  # writes pdf/Dungeon Tiles - Modular Set.pdf
 python src/cut_guide.py    # writes pdf/Dungeon Tiles - Modular Set Cut Guide.pdf
 python src/rooms.py       # writes Full Rooms and its cut guide
 python src/rooms_duplex.py  # writes the double-sided rooms and their cut guide
+python src/catalog.py      # writes catalog/tiles.json
 ```
 
 To change how many of each piece you get, edit the `add(...)` lines and the door counts near the top of `src/modular_set.py`.
