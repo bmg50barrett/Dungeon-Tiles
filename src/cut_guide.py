@@ -88,12 +88,15 @@ def P(u, v):
 
 
 def draw_page(c, pi, n_pages):
-    pcs = pieces_for_page(pi)
+    return draw_guide(c, f"Cut Guide  |  Sheet {pi + 1} of {n_pages}", pieces_for_page(pi))
+
+
+def draw_guide(c, title, pcs):
     xs = [p[0] + p[2] for p in pcs]; ys = [p[1] + p[3] for p in pcs]
     W, H = max(xs), max(ys)
     # header
     c.setFillGray(0); c.setFont('Helvetica-Bold', 11)
-    c.drawString(0.3 * inch, (PAGE_H - 0.45) * inch, f"Cut Guide  |  Sheet {pi + 1} of {n_pages}")
+    c.drawString(0.3 * inch, (PAGE_H - 0.45) * inch, title)
     c.setFont('Helvetica', 7.5)
     c.drawString(0.3 * inch, (PAGE_H - 0.62) * inch,
                  "Laminate the sheet first. Trim the margins (T), then cut in number order. "
@@ -107,7 +110,9 @@ def draw_page(c, pi, n_pages):
         size = 6.5 if h >= 1 else 6
         c.setFont('Helvetica', size)
         cx, cy = P(x + w / 2, y + h / 2)
-        c.drawCentredString(cx, cy - size / 3, lab)
+        lines = lab.split('  /  ')
+        for li, text in enumerate(lines):
+            c.drawCentredString(cx, cy - size / 3 + (len(lines) / 2 - li - 0.5) * (size + 1.5), text)
     # margin trims
     c.setStrokeColorRGB(*RED); c.setLineWidth(1.6); c.setDash([6, 3])
     trims = [((0, 0), (W, 0)), ((0, H), (W, H)), ((0, 0), (0, H)), ((W, 0), (W, H))]
