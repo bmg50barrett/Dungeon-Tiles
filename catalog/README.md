@@ -8,7 +8,7 @@ Don't edit `tiles.json` by hand. It's built by `src/catalog.py` from the same de
 python src/catalog.py
 ```
 
-Right now the catalog covers the Full Rooms files only (single-sided and double-sided). The Modular Set isn't in it yet.
+Right now the catalog covers the Full Rooms and 4x4 Rooms files (single-sided and double-sided). The Modular Set isn't in it yet.
 
 ## Structure
 
@@ -39,6 +39,7 @@ A face is one tile design, like "4x4 room, 2 doors at a corner". IDs are stable:
 |---|---|
 | `R4-1`, `R4-2O`, `R4-2C`, `R4-3`, `R4-4` | 4x4 rooms with 10 ft doorways: 1 door, 2 opposite, 2 at a corner, 3, 4 |
 | `R5-1`, `R5-2O`, `R5-2C`, `R5-3`, `R5-4` | 5x5 rooms with 5 ft doorways, same layouts |
+| `R4P-1`, `R4P-2O`, `R4P-2C`, `R4P-3`, `R4P-4` | 4x4 rooms with 5 ft doorways, same layouts. Every door is one square in from the left end of its wall going clockwise, so every opening reads `[1, 1]` |
 | `H5-S4`, `H5-S5` | 5 ft hall, straight, 4 or 5 squares long |
 | `H10-S5` | 10 ft hall, straight, 5 squares long |
 | `H5-L`, `H5-T`, `H5-X`, `H5-D` | 5 ft hall corner, T-junction, crossroads, dead end |

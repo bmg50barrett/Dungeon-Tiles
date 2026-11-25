@@ -6,13 +6,18 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 
 | File | What it is |
 |---|---|
+| `pdf/Dungeon Tiles - 4x4 Rooms.pdf` | 4x4 rooms with 5 ft doors for 5 ft hallways, in every door layout, plus 5 ft hallway pieces (2 sheets, single-sided) |
+| `pdf/Dungeon Tiles - 4x4 Rooms Cut Guide.pdf` | Cut guide for the 4x4 Rooms |
+| `pdf/Dungeon Tiles - 4x4 Rooms Double-Sided.pdf` | The same rooms printed front and back (2 sheets, 4 pages) |
+| `pdf/Dungeon Tiles - 4x4 Rooms Double-Sided Cut Guide.pdf` | Cut guide for the double-sided 4x4 Rooms |
 | `pdf/Dungeon Tiles - Modular Set.pdf` | Build-your-own pieces: corridors, room walls, corners and floors to make a room of any size, plus stairs, pits and doors (6 sheets) |
 | `pdf/Dungeon Tiles - Modular Set Cut Guide.pdf` | Cut guide for the Modular Set: a matching page for each sheet showing every tile's outline and name, with numbered cuts |
 | `pdf/Dungeon Tiles - Full Rooms.pdf` | Ready-made 4x4 and 5x5 rooms in every door layout, with spare space filled by 5 ft and 10 ft hallways (4 sheets, single-sided) |
 | `pdf/Dungeon Tiles - Full Rooms Cut Guide.pdf` | Cut guide for Full Rooms |
 | `pdf/Dungeon Tiles - Full Rooms Double-Sided.pdf` | The same rooms printed front and back, with a different door layout on each side (3 sheets, 6 pages) |
 | `pdf/Dungeon Tiles - Full Rooms Double-Sided Cut Guide.pdf` | Cut guide for the double-sided rooms, showing both faces of each piece |
-| `catalog/tiles.json` | Machine-readable list of every tile design and physical piece in the Full Rooms files, for tools like a dungeon generator's bill of materials. See `catalog/README.md` |
+| `catalog/tiles.json` | Machine-readable list of every tile design and physical piece in the Full Rooms and 4x4 Rooms files, for tools like a dungeon generator's bill of materials. See `catalog/README.md` |
+| `src/rooms4.py` | Builds the 4x4 Rooms (single- and double-sided) and their cut guides |
 | `src/catalog.py` | Builds `catalog/tiles.json` from the room definitions |
 | `src/lineart.py` | Draws the tiles and the page header with its calibration ruler |
 | `src/modular_set.py` | Lays the Modular Set out across the sheets |
@@ -68,6 +73,17 @@ The double-sided file puts a different room on the back of each piece to save ca
 - Print sheet 1 front and back first and hold it up to a light. Most printers shift the back by a millimeter or two. The walls sit inside the tile edges, so a small shift is mostly hidden.
 - Cut with the front side up.
 
+## 4x4 Rooms with 5 ft doors
+
+The Full Rooms 4x4s have 10 ft doorways, so they don't meet 5 ft hallways. These 4x4 rooms have 5 ft doorways instead.
+
+A 5 ft doorway can't sit in the middle of a 4-square wall, so every door is one square in from the left end of its wall, going clockwise around the room. Seen from above, the doors make a pinwheel. Because every door follows that same rule, the same 5 layouts (1 door, 2 opposite, 2 at a corner, 3, 4) cover every 4x4 room once you turn the tile, just like the 5x5 rooms.
+
+- Single-sided: 8 rooms on 2 sheets. The most common layouts (1 door, 2 opposite, 2 at a corner) come twice; 3 doors and 4 doors once each.
+- Double-sided: 8 pieces on 2 sheets with a different layout on each face, so 16 faces: 2 opposite x5, 2 at a corner x4, 1 door x3, 3 doors x3, 4 doors x1.
+- The rest of each sheet holds 5 ft hallway pieces: straights 4 long, corners, T-junctions, crossroads and dead ends.
+- Doorways are sized to the hallway floor, the same as the Full Rooms doorways, so walls line up where a hallway meets a door.
+
 ## How the pieces fit together
 
 - **Walls are drawn inside the tile edge**, 0.15 inch thick. This keeps every tile on the grid. The tradeoff is that squares along a wall lose a thin strip of floor, though a 1 inch mini base still fits.
@@ -81,7 +97,7 @@ The double-sided file puts a different room on the back of each piece to save ca
 - The Modular Set only has 10 foot corridors. 5 foot hallways come only in the Full Rooms files.
 - There are no natural cave pieces or furniture (tables, chests, altars and so on).
 - Door strips only fit 10 foot openings. There are no strips yet for the 5 foot doorways on the 5x5 rooms.
-- Each room size only connects to one hallway width. 4x4 rooms have 10 foot doorways and 5x5 rooms have 5 foot doorways, so a 5 foot hall meeting a 4x4 room (or a 10 foot hall meeting a 5x5 room) won't line up.
+- 5x5 rooms only come with 5 foot doorways, so a 10 foot hall can't meet a 5x5 room. (4x4 rooms now come with either width.)
 - There's no piece that narrows a 10 foot corridor down to a 5 foot hallway.
 - The Modular Set's doorway edge only fits 10 foot corridors. There's no 5 foot version.
 - Stairs only come 10 feet wide.
@@ -98,6 +114,7 @@ python src/modular_set.py  # writes pdf/Dungeon Tiles - Modular Set.pdf
 python src/cut_guide.py    # writes pdf/Dungeon Tiles - Modular Set Cut Guide.pdf
 python src/rooms.py       # writes Full Rooms and its cut guide
 python src/rooms_duplex.py  # writes the double-sided rooms and their cut guide
+python src/rooms4.py       # writes the 4x4 Rooms and their cut guides
 python src/catalog.py      # writes catalog/tiles.json
 ```
 

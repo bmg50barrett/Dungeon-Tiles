@@ -277,6 +277,141 @@
         ]
       }
     },
+    "R4P-1": {
+      "name": "Room 4x4 (20 ft), 5 ft doors, 1 door",
+      "kind": "room",
+      "size": [
+        4,
+        4
+      ],
+      "door_width_ft": 5,
+      "openings": {
+        "N": [
+          [
+            1,
+            1
+          ]
+        ],
+        "E": [],
+        "S": [],
+        "W": []
+      }
+    },
+    "R4P-2O": {
+      "name": "Room 4x4 (20 ft), 5 ft doors, 2 doors, opposite",
+      "kind": "room",
+      "size": [
+        4,
+        4
+      ],
+      "door_width_ft": 5,
+      "openings": {
+        "N": [
+          [
+            1,
+            1
+          ]
+        ],
+        "E": [],
+        "S": [
+          [
+            1,
+            1
+          ]
+        ],
+        "W": []
+      }
+    },
+    "R4P-2C": {
+      "name": "Room 4x4 (20 ft), 5 ft doors, 2 doors, corner",
+      "kind": "room",
+      "size": [
+        4,
+        4
+      ],
+      "door_width_ft": 5,
+      "openings": {
+        "N": [
+          [
+            1,
+            1
+          ]
+        ],
+        "E": [
+          [
+            1,
+            1
+          ]
+        ],
+        "S": [],
+        "W": []
+      }
+    },
+    "R4P-3": {
+      "name": "Room 4x4 (20 ft), 5 ft doors, 3 doors",
+      "kind": "room",
+      "size": [
+        4,
+        4
+      ],
+      "door_width_ft": 5,
+      "openings": {
+        "N": [
+          [
+            1,
+            1
+          ]
+        ],
+        "E": [
+          [
+            1,
+            1
+          ]
+        ],
+        "S": [
+          [
+            1,
+            1
+          ]
+        ],
+        "W": []
+      }
+    },
+    "R4P-4": {
+      "name": "Room 4x4 (20 ft), 5 ft doors, 4 doors",
+      "kind": "room",
+      "size": [
+        4,
+        4
+      ],
+      "door_width_ft": 5,
+      "openings": {
+        "N": [
+          [
+            1,
+            1
+          ]
+        ],
+        "E": [
+          [
+            1,
+            1
+          ]
+        ],
+        "S": [
+          [
+            1,
+            1
+          ]
+        ],
+        "W": [
+          [
+            1,
+            1
+          ]
+        ]
+      }
+    },
     "H5-S4": {
       "name": "5 ft hall, straight, 4 long (20 ft)",
       "kind": "hall",
@@ -1189,6 +1324,512 @@
         "R5-2O": 1,
         "R5-3": 1,
         "R5-4": 1
+      }
+    },
+    {
+      "id": "rooms-4x4",
+      "name": "4x4 Rooms, 5 ft Doors",
+      "file": "pdf/Dungeon Tiles - 4x4 Rooms.pdf",
+      "cut_guide": "pdf/Dungeon Tiles - 4x4 Rooms Cut Guide.pdf",
+      "double_sided": false,
+      "sheets": 2,
+      "pieces": [
+        {
+          "faces": [
+            "R4P-1"
+          ],
+          "sheet": 1,
+          "at": [
+            0,
+            0
+          ]
+        },
+        {
+          "faces": [
+            "R4P-2O"
+          ],
+          "sheet": 1,
+          "at": [
+            4,
+            0
+          ]
+        },
+        {
+          "faces": [
+            "R4P-2C"
+          ],
+          "sheet": 1,
+          "at": [
+            0,
+            4
+          ]
+        },
+        {
+          "faces": [
+            "R4P-3"
+          ],
+          "sheet": 1,
+          "at": [
+            4,
+            4
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4"
+          ],
+          "sheet": 1,
+          "at": [
+            0,
+            8
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4"
+          ],
+          "sheet": 1,
+          "at": [
+            4,
+            8
+          ]
+        },
+        {
+          "faces": [
+            "H5-L"
+          ],
+          "sheet": 1,
+          "at": [
+            0,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-T"
+          ],
+          "sheet": 1,
+          "at": [
+            1,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-X"
+          ],
+          "sheet": 1,
+          "at": [
+            2,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-D"
+          ],
+          "sheet": 1,
+          "at": [
+            3,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4"
+          ],
+          "sheet": 1,
+          "at": [
+            4,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "R4P-1"
+          ],
+          "sheet": 2,
+          "at": [
+            0,
+            0
+          ]
+        },
+        {
+          "faces": [
+            "R4P-2O"
+          ],
+          "sheet": 2,
+          "at": [
+            4,
+            0
+          ]
+        },
+        {
+          "faces": [
+            "R4P-2C"
+          ],
+          "sheet": 2,
+          "at": [
+            0,
+            4
+          ]
+        },
+        {
+          "faces": [
+            "R4P-4"
+          ],
+          "sheet": 2,
+          "at": [
+            4,
+            4
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4"
+          ],
+          "sheet": 2,
+          "at": [
+            0,
+            8
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4"
+          ],
+          "sheet": 2,
+          "at": [
+            4,
+            8
+          ]
+        },
+        {
+          "faces": [
+            "H5-L"
+          ],
+          "sheet": 2,
+          "at": [
+            0,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-T"
+          ],
+          "sheet": 2,
+          "at": [
+            1,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-X"
+          ],
+          "sheet": 2,
+          "at": [
+            2,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-D"
+          ],
+          "sheet": 2,
+          "at": [
+            3,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4"
+          ],
+          "sheet": 2,
+          "at": [
+            4,
+            9
+          ]
+        }
+      ],
+      "faces_available": {
+        "H5-D": 2,
+        "H5-L": 2,
+        "H5-S4": 6,
+        "H5-T": 2,
+        "H5-X": 2,
+        "R4P-1": 2,
+        "R4P-2C": 2,
+        "R4P-2O": 2,
+        "R4P-3": 1,
+        "R4P-4": 1
+      }
+    },
+    {
+      "id": "rooms-4x4-duplex",
+      "name": "4x4 Rooms, 5 ft Doors, Double-Sided",
+      "file": "pdf/Dungeon Tiles - 4x4 Rooms Double-Sided.pdf",
+      "cut_guide": "pdf/Dungeon Tiles - 4x4 Rooms Double-Sided Cut Guide.pdf",
+      "double_sided": true,
+      "sheets": 2,
+      "pieces": [
+        {
+          "faces": [
+            "R4P-2O",
+            "R4P-1"
+          ],
+          "sheet": 1,
+          "at": [
+            0,
+            0
+          ]
+        },
+        {
+          "faces": [
+            "R4P-2O",
+            "R4P-2C"
+          ],
+          "sheet": 1,
+          "at": [
+            4,
+            0
+          ]
+        },
+        {
+          "faces": [
+            "R4P-2O",
+            "R4P-3"
+          ],
+          "sheet": 1,
+          "at": [
+            0,
+            4
+          ]
+        },
+        {
+          "faces": [
+            "R4P-1",
+            "R4P-2C"
+          ],
+          "sheet": 1,
+          "at": [
+            4,
+            4
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4",
+            "H5-S4"
+          ],
+          "sheet": 1,
+          "at": [
+            0,
+            8
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4",
+            "H5-S4"
+          ],
+          "sheet": 1,
+          "at": [
+            4,
+            8
+          ]
+        },
+        {
+          "faces": [
+            "H5-L",
+            "H5-T"
+          ],
+          "sheet": 1,
+          "at": [
+            0,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-X",
+            "H5-D"
+          ],
+          "sheet": 1,
+          "at": [
+            1,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-L",
+            "H5-T"
+          ],
+          "sheet": 1,
+          "at": [
+            2,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-X",
+            "H5-D"
+          ],
+          "sheet": 1,
+          "at": [
+            3,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4",
+            "H5-S4"
+          ],
+          "sheet": 1,
+          "at": [
+            4,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "R4P-2O",
+            "R4P-1"
+          ],
+          "sheet": 2,
+          "at": [
+            0,
+            0
+          ]
+        },
+        {
+          "faces": [
+            "R4P-2O",
+            "R4P-2C"
+          ],
+          "sheet": 2,
+          "at": [
+            4,
+            0
+          ]
+        },
+        {
+          "faces": [
+            "R4P-3",
+            "R4P-2C"
+          ],
+          "sheet": 2,
+          "at": [
+            0,
+            4
+          ]
+        },
+        {
+          "faces": [
+            "R4P-4",
+            "R4P-3"
+          ],
+          "sheet": 2,
+          "at": [
+            4,
+            4
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4",
+            "H5-S4"
+          ],
+          "sheet": 2,
+          "at": [
+            0,
+            8
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4",
+            "H5-S4"
+          ],
+          "sheet": 2,
+          "at": [
+            4,
+            8
+          ]
+        },
+        {
+          "faces": [
+            "H5-L",
+            "H5-T"
+          ],
+          "sheet": 2,
+          "at": [
+            0,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-X",
+            "H5-D"
+          ],
+          "sheet": 2,
+          "at": [
+            1,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-L",
+            "H5-T"
+          ],
+          "sheet": 2,
+          "at": [
+            2,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-X",
+            "H5-D"
+          ],
+          "sheet": 2,
+          "at": [
+            3,
+            9
+          ]
+        },
+        {
+          "faces": [
+            "H5-S4",
+            "H5-S4"
+          ],
+          "sheet": 2,
+          "at": [
+            4,
+            9
+          ]
+        }
+      ],
+      "faces_available": {
+        "H5-D": 4,
+        "H5-L": 4,
+        "H5-S4": 6,
+        "H5-T": 4,
+        "H5-X": 4,
+        "R4P-1": 3,
+        "R4P-2C": 4,
+        "R4P-2O": 5,
+        "R4P-3": 3,
+        "R4P-4": 1
       }
     }
   ]

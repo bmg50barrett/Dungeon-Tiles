@@ -14,7 +14,7 @@ next side (N to E, E to S, S to W, W to N) and swaps width and height."""
 import json, math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lineart import T
-import rooms, rooms_duplex
+import rooms, rooms_duplex, rooms4
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'catalog', 'tiles.json')
@@ -31,6 +31,10 @@ for n, ft, dw in ((4, 20, 10), (5, 25, 5)):
     for suffix, doors, label in DOORS:
         FACES[f"R{n}-{suffix}"] = dict(name=f"Room {n}x{n} ({ft} ft), {label}", kind='room',
                                        door_width_ft=dw, w=n, h=n, walls=rooms.room_walls(n, doors))
+# 4x4 rooms with 5 ft doors, each one square in from the left end of its wall going clockwise (see rooms4.py)
+for suffix, doors, label in DOORS:
+    FACES[f"R4P-{suffix}"] = dict(name=f"Room 4x4 (20 ft), 5 ft doors, {label}", kind='room', door_width_ft=5,
+                                  w=4, h=4, walls=rooms4.pinwheel_walls(doors))
 for L in (4, 5):
     FACES[f"H5-S{L}"] = dict(name=f"5 ft hall, straight, {L} long ({L * 5} ft)", kind='hall', hall_width_ft=5,
                              w=1, h=L, walls=rooms.H5['v'](L))
@@ -107,6 +111,28 @@ def double_sided():
                 sheets=len(rooms_duplex.SHEETS), pieces=pieces)
 
 
+def rooms4_single():
+    pieces = []
+    for si, sheet in enumerate(rooms4.SHEETS, 1):
+        for x, y, (w, h, walls, _) in sheet:
+            fid, _ = identify(w, h, walls)
+            pieces.append(dict(faces=[fid], sheet=si, at=[x, y]))
+    return dict(id='rooms-4x4', name='4x4 Rooms, 5 ft Doors', file='pdf/Dungeon Tiles - 4x4 Rooms.pdf',
+                cut_guide='pdf/Dungeon Tiles - 4x4 Rooms Cut Guide.pdf', double_sided=False,
+                sheets=len(rooms4.SHEETS), pieces=pieces)
+
+
+def rooms4_double():
+    pieces = []
+    for si, sheet in enumerate(rooms4.DSHEETS, 1):
+        for x, y, (w, h, fw, bw, _, _) in sheet:
+            pieces.append(dict(faces=[identify(w, h, fw)[0], identify(w, h, bw)[0]], sheet=si, at=[x, y]))
+    return dict(id='rooms-4x4-duplex', name='4x4 Rooms, 5 ft Doors, Double-Sided',
+                file='pdf/Dungeon Tiles - 4x4 Rooms Double-Sided.pdf',
+                cut_guide='pdf/Dungeon Tiles - 4x4 Rooms Double-Sided Cut Guide.pdf', double_sided=True,
+                sheets=len(rooms4.DSHEETS), pieces=pieces)
+
+
 def face_counts(ed):
     counts = {}
     for p in ed['pieces']:
@@ -116,7 +142,7 @@ def face_counts(ed):
 
 
 if __name__ == '__main__':
-    editions = [single_sided(), double_sided()]
+    editions = [single_sided(), double_sided(), rooms4_single(), rooms4_double()]
     for ed in editions:
         ed['faces_available'] = face_counts(ed)
     faces = {}
