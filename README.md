@@ -10,14 +10,19 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 | `pdf/Dungeon Tiles - 4x4 Rooms Cut Guide.pdf` | Cut guide for the 4x4 Rooms |
 | `pdf/Dungeon Tiles - 4x4 Rooms Double-Sided.pdf` | The same rooms printed front and back (2 sheets, 4 pages) |
 | `pdf/Dungeon Tiles - 4x4 Rooms Double-Sided Cut Guide.pdf` | Cut guide for the double-sided 4x4 Rooms |
+| `pdf/Dungeon Tiles - 5 ft Hallways.pdf` | A sheet of 5 ft hallway pieces: straights 4 and 5 long, 1-square straights, corners, T-junctions, a crossroads and a dead end |
+| `pdf/Dungeon Tiles - 5 ft Hallways Cut Guide.pdf` | Cut guide for 5 ft Hallways |
+| `pdf/Dungeon Tiles - 5 ft Hallways Double-Sided.pdf` | The same sheet printed front and back, with a different piece on the back of each small piece |
+| `pdf/Dungeon Tiles - 5 ft Hallways Double-Sided Cut Guide.pdf` | Cut guide for the double-sided 5 ft Hallways |
 | `pdf/Dungeon Tiles - Modular Set.pdf` | Build-your-own pieces: corridors, room walls, corners and floors to make a room of any size, plus stairs, pits and doors (6 sheets) |
 | `pdf/Dungeon Tiles - Modular Set Cut Guide.pdf` | Cut guide for the Modular Set: a matching page for each sheet showing every tile's outline and name, with numbered cuts |
 | `pdf/Dungeon Tiles - Full Rooms.pdf` | Ready-made 4x4 and 5x5 rooms in every door layout, with spare space filled by 5 ft and 10 ft hallways (4 sheets, single-sided) |
 | `pdf/Dungeon Tiles - Full Rooms Cut Guide.pdf` | Cut guide for Full Rooms |
 | `pdf/Dungeon Tiles - Full Rooms Double-Sided.pdf` | The same rooms printed front and back, with a different door layout on each side (3 sheets, 6 pages) |
 | `pdf/Dungeon Tiles - Full Rooms Double-Sided Cut Guide.pdf` | Cut guide for the double-sided rooms, showing both faces of each piece |
-| `catalog/tiles.json` | Machine-readable list of every tile design and physical piece in the Full Rooms and 4x4 Rooms files, for tools like a dungeon generator's bill of materials. See `catalog/README.md` |
+| `catalog/tiles.json` | Machine-readable list of every tile design and physical piece in the Full Rooms, 4x4 Rooms and 5 ft Hallways files, for tools like a dungeon generator's bill of materials. See `catalog/README.md` |
 | `src/rooms4.py` | Builds the 4x4 Rooms (single- and double-sided) and their cut guides |
+| `src/halls.py` | Builds the 5 ft Hallways sheets and their cut guides |
 | `src/catalog.py` | Builds `catalog/tiles.json` from the room definitions |
 | `src/lineart.py` | Draws the tiles and the page header with its calibration ruler |
 | `src/modular_set.py` | Lays the Modular Set out across the sheets |
@@ -84,6 +89,24 @@ A 5 ft doorway can't sit in the middle of a 4-square wall, so every door is one 
 - The rest of each sheet holds 5 ft hallway pieces: straights 4 long, corners, T-junctions, crossroads and dead ends.
 - Doorways are sized to the hallway floor, the same as the Full Rooms doorways, so walls line up where a hallway meets a door.
 
+## 5 ft Hallways
+
+A sheet of nothing but 5 ft hallway pieces, for dungeons with more hallway than the room sheets carry. Its mix follows what tile-mode dungeons from Dungeon Maker need, which works out to about one sheet for an average dungeon.
+
+| Piece | Single-sided | Double-sided (faces) |
+|---|---|---|
+| Straight, 4 long | 11 | 11 |
+| Straight, 5 long | 1 | 1 |
+| Straight, 1 long | 10 | 20 |
+| Corner | 15 | 27 |
+| T-junction | 4 | 8 |
+| Crossroads | 1 | 2 |
+| Dead end | 1 | 2 |
+
+On the double-sided sheet the long straights are the same on both sides, and every small piece has a different back (corner and 1-square straight, corner and T, and so on), so one printing bends towards whatever a dungeon needs.
+
+**You don't need a straight for every length.** A straight that's too long can run under a room tile where the hallway meets a door, or 1 square under the corner, T or crossroads tile it ends at. Lay the straights first and the other tiles on top. With that, the 4- and 5-long straights cover every length except a 1-square stretch between two junctions, which is what the 1-square straight is for.
+
 ## How the pieces fit together
 
 - **Walls are drawn inside the tile edge**, 0.15 inch thick. This keeps every tile on the grid. The tradeoff is that squares along a wall lose a thin strip of floor, though a 1 inch mini base still fits.
@@ -101,7 +124,6 @@ A 5 ft doorway can't sit in the middle of a 4-square wall, so every door is one 
 - There's no piece that narrows a 10 foot corridor down to a 5 foot hallway.
 - The Modular Set's doorway edge only fits 10 foot corridors. There's no 5 foot version.
 - Stairs only come 10 feet wide.
-- There are only a few 5 foot corners, T-junctions, crossroads and dead ends, so a twisty 5 foot maze will run out quickly.
 - Everything runs square to the grid. There are no diagonal corridors.
 
 ## Rebuilding the PDFs
@@ -115,6 +137,7 @@ python src/cut_guide.py    # writes pdf/Dungeon Tiles - Modular Set Cut Guide.pd
 python src/rooms.py       # writes Full Rooms and its cut guide
 python src/rooms_duplex.py  # writes the double-sided rooms and their cut guide
 python src/rooms4.py       # writes the 4x4 Rooms and their cut guides
+python src/halls.py        # writes the 5 ft Hallways and their cut guides
 python src/catalog.py      # writes catalog/tiles.json
 ```
 
