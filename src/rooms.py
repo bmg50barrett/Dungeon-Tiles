@@ -15,7 +15,9 @@ PDF = os.path.join(HERE, '..', 'pdf')
 def room_walls(n, doors):
     """Walls for an n x n room. doors is a string of sides from 'NESW'."""
     g = 2 if n % 2 == 0 else 1
-    a, b = (n - g) / 2, (n + g) / 2
+    # the opening matches a hallway's floor: the doorway square(s) keep a wall
+    # stub of thickness T on each side, just like the hallway's own walls
+    a, b = (n - g) / 2 + T, (n + g) / 2 - T
     rects = []
     # north and south walls run the full width
     for side, v in (('N', 0), ('S', n - T)):

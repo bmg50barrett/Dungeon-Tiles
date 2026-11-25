@@ -52,7 +52,7 @@ That's 74 tiles plus 24 door strips, enough for a dungeon about 4 by 6 feet on t
 Most rooms in play are 4x4 (20 ft) or 5x5 (25 ft), so these come pre-built with walls on all four sides. Each size comes in every door layout: 1 door, 2 doors opposite, 2 doors at a corner, 3 doors and 4 doors. Any other layout is one of these turned around on the table.
 
 - Doorways are centered in the wall. 5x5 rooms have 5 ft doorways, since an odd-length wall can only center a 1-square opening. 4x4 rooms have 10 ft doorways, which fit the 10 ft door strips.
-- Doorways are open gaps. Lay a door strip over one if you want a door there.
+- Doorways are open gaps, and each one is exactly as wide as the hallway floor: the room wall runs 0.15 inch into the doorway square on each side, matching the hallway's own walls, so walls line up when a hallway meets the door. Lay a door strip over one if you want a door there.
 - Spare space on the sheets is filled with 5 ft and 10 ft hallways: straights, plus small 5 ft corners, T-junctions, crossroads and dead ends.
 - 5 ft hallways are tight. With walls on both sides there's about 0.7 inch of floor, so a 1 inch mini base sits slightly over the walls.
 
@@ -69,7 +69,7 @@ The double-sided file puts a different room on the back of each piece to save ca
 
 - **Walls are drawn inside the tile edge**, 0.15 inch thick. This keeps every tile on the grid. The tradeoff is that squares along a wall lose a thin strip of floor, though a 1 inch mini base still fits.
 - **Corridors and rooms share one system.** Build a room from outer corners, edges and plain floors. Use the inner corner piece (a small wall post) where a room turns an L-shaped corner.
-- **To join a corridor to a room,** put a plain floor piece in the room's wall where you'd normally put an edge piece.
+- **To join a corridor to a room,** put a plain floor piece in the room's wall where you'd normally put an edge piece. Note that this leaves an opening 0.3 inch wider than the corridor floor, so the walls don't quite meet. The Full Rooms pieces have properly sized doorways.
 - **Doors are 2 x 0.5 inch strips** that lie across a 10 foot opening, centered on the joint between two tiles.
 - **Stairs work both ways.** The step lines bunch together at the low end. Turn the tile around to make them go up instead of down.
 
@@ -77,6 +77,7 @@ The double-sided file puts a different room on the back of each piece to save ca
 
 - The modular full set only has 10 foot corridors. 5 foot hallways come only in the Full Rooms files.
 - There are no natural cave pieces or furniture (tables, chests, altars and so on).
+- The modular full set has no doorway edge piece yet, so a corridor joining a room built from edge pieces won't have its walls line up exactly.
 - Door strips only fit 10 foot openings. There are no strips yet for the 5 foot doorways on the 5x5 rooms.
 - The pieces above take up a bit less than 6 sheets, so the leftover spaces are filled with extra plain floors and room edges (already counted in the table).
 
