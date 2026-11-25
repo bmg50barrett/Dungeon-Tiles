@@ -8,7 +8,7 @@ Don't edit `tiles.json` by hand. It's built by `src/catalog.py` from the same de
 python src/catalog.py
 ```
 
-Right now the catalog covers the Full Rooms, 4x4 Rooms and 5 ft Hallways files (single-sided and double-sided). The Modular Set isn't in it yet.
+Right now the catalog covers the Full Rooms, 4x4 Rooms, 5 ft Hallways and Room Pack files (single-sided and double-sided). The Modular Set isn't in it yet.
 
 ## Structure
 

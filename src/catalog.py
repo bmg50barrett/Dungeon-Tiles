@@ -14,7 +14,7 @@ next side (N to E, E to S, S to W, W to N) and swaps width and height."""
 import json, math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lineart import T
-import rooms, rooms_duplex, rooms4, halls
+import rooms, rooms_duplex, rooms4, halls, packs
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'catalog', 'tiles.json')
@@ -157,6 +157,19 @@ def halls_double():
                 sheets=len(halls.DSHEETS), pieces=pieces)
 
 
+def pack_editions():
+    out = []
+    for pack in packs.PACKS:
+        pieces = []
+        for x, y, (w, h, fw, bw, _, _) in pack['items']:
+            faces = [identify(w, h, fw)[0]] + ([identify(w, h, bw)[0]] if pack['two'] else [])
+            pieces.append(dict(faces=faces, sheet=1, at=[x, y]))
+        out.append(dict(id=pack['id'], name=pack['name'], file=f"pdf/Dungeon Tiles - {pack['file']}.pdf",
+                        cut_guide=f"pdf/Dungeon Tiles - {pack['file']} Cut Guide.pdf", double_sided=pack['two'],
+                        sheets=1, pieces=pieces))
+    return out
+
+
 def face_counts(ed):
     counts = {}
     for p in ed['pieces']:
@@ -166,7 +179,7 @@ def face_counts(ed):
 
 
 if __name__ == '__main__':
-    editions = [single_sided(), double_sided(), rooms4_single(), rooms4_double(), halls_single(), halls_double()]
+    editions = [single_sided(), double_sided(), rooms4_single(), rooms4_double(), halls_single(), halls_double()] + pack_editions()
     for ed in editions:
         ed['faces_available'] = face_counts(ed)
     faces = {}
