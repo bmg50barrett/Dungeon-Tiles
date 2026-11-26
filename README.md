@@ -19,6 +19,10 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 | `pdf/Dungeon Tiles - 5x5 Room Pack B.pdf` | One sheet: 5x5 rooms with 2 doors at a corner and 3 doors, plus hallway pieces |
 | `pdf/Dungeon Tiles - 4x4 Room Pack Double-Sided.pdf` | One double-sided sheet of 4x4 rooms (1 door / 3 doors, 1 door / corner, opposite / corner, opposite / 4 doors) plus hallway pieces |
 | `pdf/Dungeon Tiles - 5x5 Room Pack Double-Sided.pdf` | One double-sided sheet of 5x5 rooms (1 door / corner, opposite / 3 doors) plus hallway pieces |
+| `pdf/Dungeon Tiles - 5x6 Rooms.pdf`, `5x7 Rooms.pdf` | Long rooms, 25 x 30 ft and 25 x 35 ft, with 5 ft doors, in all 9 door layouts (5 sheets each, single-sided). See *Long rooms* below |
+| `pdf/Dungeon Tiles - 5x6 Rooms Double-Sided.pdf`, `5x7 Rooms Double-Sided.pdf` | The same long rooms printed front and back (3 sheets each) |
+| `pdf/Dungeon Tiles - 5x6 Room Pack A.pdf`, `B`, `C` (and the same for 5x7) | One sheet each of the most used long rooms: A is 1 door (end, side), B is 2 doors (both ends, both sides), C is 2 doors at a corner (right, left) |
+| `pdf/Dungeon Tiles - 5x6 Room Pack Double-Sided A.pdf`, `B` (and the same for 5x7) | One double-sided sheet each: A is 1 door end / both ends and 1 door side / both sides; B is 1 door end / corner right and 1 door side / corner left |
 | `pdf/Dungeon Tiles - Modular Set.pdf` | Build-your-own pieces: corridors, room walls, corners and floors to make a room of any size, plus stairs, pits and doors (6 sheets) |
 | `pdf/Dungeon Tiles - Modular Set Cut Guide.pdf` | Cut guide for the Modular Set: a matching page for each sheet showing every tile's outline and name, with numbered cuts |
 | `pdf/Dungeon Tiles - Full Rooms.pdf` | Ready-made 4x4 and 5x5 rooms in every door layout, with spare space filled by 5 ft and 10 ft hallways (4 sheets, single-sided) |
@@ -29,6 +33,7 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 | `src/rooms4.py` | Builds the 4x4 Rooms (single- and double-sided) and their cut guides |
 | `src/halls.py` | Builds the 5 ft Hallways sheets and their cut guides |
 | `src/packs.py` | Builds the Room Packs and their cut guides |
+| `src/longrooms.py` | Builds the 5x6 and 5x7 rooms, their packs and their cut guides |
 | `src/catalog.py` | Builds `catalog/tiles.json` from the room definitions |
 | `src/lineart.py` | Draws the tiles and the page header with its calibration ruler |
 | `src/modular_set.py` | Lays the Modular Set out across the sheets |
@@ -94,6 +99,33 @@ A 5 ft doorway can't sit in the middle of a 4-square wall, so every door is one 
 - Double-sided: 8 pieces on 2 sheets with a different layout on each face, so 16 faces: 2 opposite x5, 2 at a corner x4, 1 door x3, 3 doors x3, 4 doors x1.
 - The rest of each sheet holds 5 ft hallway pieces: straights 4 long, corners, T-junctions, crossroads and dead ends.
 - Doorways are sized to the hallway floor, the same as the Full Rooms doorways, so walls line up where a hallway meets a door.
+
+## Long rooms (5x6 and 5x7)
+
+After the squares, the room sizes Dungeon Maker makes most often are longer than they are wide. Its Tile mode can use these two, and its tile list counts them.
+
+The doors follow the same rule as the 4x4 and 5x5 rooms: one square in from the left end of the wall going clockwise, as close to the middle as a 5 ft door can get. On an odd wall (5 or 7 long) that is the middle. On a 6-long wall it is one square clockwise of the middle, like the 4x4 pinwheel. Every 5x7 door is centered.
+
+A square room tile matches itself turned four ways, but a long one only turned end for end, so it takes 9 layouts to cover every room instead of 5. With the room standing tall, the short walls at top and bottom are the *ends* and the long walls the *sides*:
+
+| Layout | Doors | How often a long room needs it |
+|---|---|---|
+| 1A | 1, in an end | about 21% |
+| 1B | 1, in a side | about 22% |
+| 2A | 2, both ends | about 12% |
+| 2B | 2, both sides | about 13% |
+| 2C | 2 at a corner, the side door to the right of the end door | about 10% |
+| 2D | 2 at a corner, the side door to the left | about 12% |
+| 3A | 3, both ends and a side | under 3% |
+| 3B | 3, both sides and an end | under 3% |
+| 4 | 4 | rare |
+
+The percentages come from 1,500 tile-mode dungeons using all four room sizes.
+
+- Single-sided: 2 rooms to a sheet, laid on their sides, so 5 sheets carry all 9 layouts plus a second 1B.
+- Double-sided: 3 sheets, 12 faces. Common layouts are backed by rare ones, so one piece is seldom wanted for both its faces in the same dungeon.
+- Room Packs A, B and C hold the six common layouts on three single sheets. The double-sided packs put a 1-door room on the front of every piece and a 2-door room on the back.
+- The strip beside the rooms holds 5-long straights: four on a 5x6 sheet, two on a 5x7 sheet.
 
 ## 5 ft Hallways
 
@@ -168,6 +200,7 @@ python src/rooms_duplex.py  # writes the double-sided rooms and their cut guide
 python src/rooms4.py       # writes the 4x4 Rooms and their cut guides
 python src/halls.py        # writes the 5 ft Hallways and their cut guides
 python src/packs.py        # writes the Room Packs and their cut guides
+python src/longrooms.py    # writes the 5x6 and 5x7 rooms, their packs and their cut guides
 python src/catalog.py      # writes catalog/tiles.json
 ```
 

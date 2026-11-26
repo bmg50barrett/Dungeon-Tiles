@@ -14,7 +14,7 @@ next side (N to E, E to S, S to W, W to N) and swaps width and height."""
 import json, math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lineart import T
-import rooms, rooms_duplex, rooms4, halls, packs
+import rooms, rooms_duplex, rooms4, halls, packs, longrooms
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'catalog', 'tiles.json')
@@ -45,6 +45,13 @@ for fid, key, label in (('H5-L', 'corner', 'corner'), ('H5-T', 'tee', 'T-junctio
                         ('H5-X', 'cross', 'crossroads'), ('H5-D', 'dead', 'dead end')):
     FACES[fid] = dict(name=f"5 ft hall, {label}", kind='hall', hall_width_ft=5, w=1, h=1, walls=rooms.H5[key])
 
+# long rooms, 5x6 and 5x7, with 5 ft doors placed by the same clockwise rule (see longrooms.py). Canonical face: standing
+# tall, 5 wide and n long, so N and S are the short end walls. 1A/1B one door in an end/side; 2A both ends; 2B both sides;
+# 2C/2D a corner, the side door right/left of the end door; 3A both ends and a side; 3B both sides and an end; 4 all.
+for n in longrooms.SIZES:
+    for code, (doors, label) in longrooms.LAYOUTS.items():
+        FACES[f"R5{n}-{code}"] = dict(name=f"Room 5x{n} (25x{n * 5} ft), 5 ft doors, {label}", kind='room', door_width_ft=5,
+                                      w=5, h=n, walls=longrooms.face_walls(n, code))
 
 # ---------------------------------------------------------------- geometry
 def signature(w, h, walls):
@@ -170,6 +177,20 @@ def pack_editions():
     return out
 
 
+def long_editions():
+    out = []
+    for eid, name, file, two, sheets in longrooms.EDITIONS:
+        pieces = []
+        for si, items in enumerate(sheets, 1):
+            for x, y, (w, h, fw, bw, _, _) in items:
+                faces = [identify(w, h, fw)[0]] + ([identify(w, h, bw)[0]] if two else [])
+                pieces.append(dict(faces=faces, sheet=si, at=[x, y]))
+        out.append(dict(id=eid, name=name, file=f"pdf/Dungeon Tiles - {file}.pdf",
+                        cut_guide=f"pdf/Dungeon Tiles - {file} Cut Guide.pdf", double_sided=two,
+                        sheets=len(sheets), pieces=pieces))
+    return out
+
+
 def face_counts(ed):
     counts = {}
     for p in ed['pieces']:
@@ -179,7 +200,7 @@ def face_counts(ed):
 
 
 if __name__ == '__main__':
-    editions = [single_sided(), double_sided(), rooms4_single(), rooms4_double(), halls_single(), halls_double()] + pack_editions()
+    editions = [single_sided(), double_sided(), rooms4_single(), rooms4_double(), halls_single(), halls_double()] + pack_editions() + long_editions()
     for ed in editions:
         ed['faces_available'] = face_counts(ed)
     faces = {}
