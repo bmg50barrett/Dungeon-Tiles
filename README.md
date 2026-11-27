@@ -23,6 +23,8 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 | `pdf/Dungeon Tiles - 5x6 Rooms Double-Sided.pdf`, `5x7 Rooms Double-Sided.pdf` | The same long rooms printed front and back (3 sheets each) |
 | `pdf/Dungeon Tiles - 5x6 Room Pack A.pdf`, `B`, `C` (and the same for 5x7) | One sheet each of the most used long rooms: A is 1 door (end, side), B is 2 doors (both ends, both sides), C is 2 doors at a corner (right, left) |
 | `pdf/Dungeon Tiles - 5x6 Room Pack Double-Sided A.pdf`, `B` (and the same for 5x7) | One double-sided sheet each: A is 1 door end / both ends and 1 door side / both sides; B is 1 door end / corner right and 1 door side / corner left |
+| `pdf/Dungeon Tiles - Doorless Rooms All Sizes.pdf` | Rooms with no doors, for door markers: one sheet each of 4x4, 4x5, 4x6, 4x7, 4x8, 5x5, 5x6, 5x7, 5x8 and 6x6 (10 sheets). See *Doorless rooms* below |
+| `pdf/Dungeon Tiles - 4x4 Doorless Rooms.pdf` (and the same for each size) | The same sheets one size at a time, to print as many as you need |
 | `pdf/Dungeon Tiles - Modular Set.pdf` | Build-your-own pieces: corridors, room walls, corners and floors to make a room of any size, plus stairs, pits and doors (6 sheets) |
 | `pdf/Dungeon Tiles - Modular Set Cut Guide.pdf` | Cut guide for the Modular Set: a matching page for each sheet showing every tile's outline and name, with numbered cuts |
 | `pdf/Dungeon Tiles - Full Rooms.pdf` | Ready-made 4x4 and 5x5 rooms in every door layout, with spare space filled by 5 ft and 10 ft hallways (4 sheets, single-sided) |
@@ -34,6 +36,7 @@ Printable, modular dungeon tiles in black line art, made for a Chessex battle ma
 | `src/halls.py` | Builds the 5 ft Hallways sheets and their cut guides |
 | `src/packs.py` | Builds the Room Packs and their cut guides |
 | `src/longrooms.py` | Builds the 5x6 and 5x7 rooms, their packs and their cut guides |
+| `src/doorless.py` | Builds the doorless rooms and their cut guides |
 | `src/catalog.py` | Builds `catalog/tiles.json` from the room definitions |
 | `src/lineart.py` | Draws the tiles and the page header with its calibration ruler |
 | `src/modular_set.py` | Lays the Modular Set out across the sheets |
@@ -127,6 +130,17 @@ The percentages come from 1,500 tile-mode dungeons using all four room sizes.
 - Room Packs A, B and C hold the six common layouts on three single sheets. The double-sided packs put a 1-door room on the front of every piece and a 2-door room on the back.
 - The strip beside the rooms holds 5-long straights: four on a 5x6 sheet, two on a 5x7 sheet.
 
+## Doorless rooms (for door markers)
+
+The other room tiles have their doorways printed on them, which means a tile for every door layout: 5 per square size and 9 per long size. Doorless rooms skip that. Every room has a solid wall all the way round, and the doors are shown with standing door markers (such as C4Labs' small door markers: a 1 inch door on a round base). One design per size covers every room of that size, whatever its doors.
+
+- Ten sizes: 4x4, 4x5, 4x6, 4x7, 4x8, 5x5, 5x6, 5x7, 5x8 and 6x6. Between them they cover the room sizes Dungeon Maker makes most often.
+- One sheet per size, as many of that room as fit, with 5 ft straights in any spare space. The 6x6 sheet also has two 4x4s below the 6x6.
+- *Doorless Rooms All Sizes* is all ten sheets in one file, for printing one of everything. The single-size files are for printing more of the sizes you use most.
+- To place a door, stand the marker on the room's wall line where a hallway or another room meets it. The marker's base overhangs a little into the squares on both sides. Stood fully open, a marker can stand for an open archway.
+- There are no double-sided versions. A piece can only carry the same size on its back, and every room of a size is the same.
+- Door markers also work on the tiles with printed doorways: stand one in the gap to show a closed door.
+
 ## 5 ft Hallways
 
 A sheet of nothing but 5 ft hallway pieces, for dungeons with more hallway than the room sheets carry. Its mix follows what tile-mode dungeons from Dungeon Maker need, which works out to about one sheet for an average dungeon.
@@ -201,6 +215,7 @@ python src/rooms4.py       # writes the 4x4 Rooms and their cut guides
 python src/halls.py        # writes the 5 ft Hallways and their cut guides
 python src/packs.py        # writes the Room Packs and their cut guides
 python src/longrooms.py    # writes the 5x6 and 5x7 rooms, their packs and their cut guides
+python src/doorless.py     # writes the doorless rooms and their cut guides
 python src/catalog.py      # writes catalog/tiles.json
 ```
 

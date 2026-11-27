@@ -14,7 +14,7 @@ next side (N to E, E to S, S to W, W to N) and swaps width and height."""
 import json, math, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from lineart import T
-import rooms, rooms_duplex, rooms4, halls, packs, longrooms
+import rooms, rooms_duplex, rooms4, halls, packs, longrooms, doorless
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, '..', 'catalog', 'tiles.json')
@@ -52,6 +52,11 @@ for n in longrooms.SIZES:
     for code, (doors, label) in longrooms.LAYOUTS.items():
         FACES[f"R5{n}-{code}"] = dict(name=f"Room 5x{n} (25x{n * 5} ft), 5 ft doors, {label}", kind='room', door_width_ft=5,
                                       w=5, h=n, walls=longrooms.face_walls(n, code))
+# doorless rooms, for door markers: a solid wall all the way round, one design per size (see doorless.py)
+for z in doorless.SIZES:
+    a, b = map(int, z.split('x'))
+    FACES[f"R{a}{b}-0"] = dict(name=f"Room {z} ({a * 5}x{b * 5} ft), no doors (use door markers)", kind='room', door_width_ft=None,
+                               w=a, h=b, walls=longrooms.rect_walls(a, b, ''))
 
 # ---------------------------------------------------------------- geometry
 def signature(w, h, walls):
@@ -191,6 +196,19 @@ def long_editions():
     return out
 
 
+def doorless_editions():
+    out = []
+    for eid, name, file, sizes in doorless.EDITIONS:
+        pieces = []
+        for si, z in enumerate(sizes, 1):
+            for x, y, (w, h, walls, _) in doorless.SHEETS[z]:
+                pieces.append(dict(faces=[identify(w, h, walls)[0]], sheet=si, at=[x, y]))
+        out.append(dict(id=eid, name=name, file=f"pdf/Dungeon Tiles - {file}.pdf",
+                        cut_guide=f"pdf/Dungeon Tiles - {file} Cut Guide.pdf", double_sided=False,
+                        sheets=len(sizes), pieces=pieces))
+    return out
+
+
 def face_counts(ed):
     counts = {}
     for p in ed['pieces']:
@@ -200,7 +218,7 @@ def face_counts(ed):
 
 
 if __name__ == '__main__':
-    editions = [single_sided(), double_sided(), rooms4_single(), rooms4_double(), halls_single(), halls_double()] + pack_editions() + long_editions()
+    editions = [single_sided(), double_sided(), rooms4_single(), rooms4_double(), halls_single(), halls_double()] + pack_editions() + long_editions() + doorless_editions()
     for ed in editions:
         ed['faces_available'] = face_counts(ed)
     faces = {}

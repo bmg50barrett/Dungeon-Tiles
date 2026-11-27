@@ -8,7 +8,7 @@ Don't edit `tiles.json` by hand. It's built by `src/catalog.py` from the same de
 python src/catalog.py
 ```
 
-Right now the catalog covers the Full Rooms, 4x4 Rooms, 5x6 and 5x7 Rooms, 5 ft Hallways and Room Pack files (single-sided and double-sided). The Modular Set isn't in it yet.
+Right now the catalog covers the Full Rooms, 4x4 Rooms, 5x6 and 5x7 Rooms, Doorless Rooms, 5 ft Hallways and Room Pack files (single-sided and double-sided). The Modular Set isn't in it yet.
 
 ## Structure
 
@@ -41,6 +41,7 @@ A face is one tile design, like "4x4 room, 2 doors at a corner". IDs are stable:
 | `R5-1`, `R5-2O`, `R5-2C`, `R5-3`, `R5-4` | 5x5 rooms with 5 ft doorways, same layouts |
 | `R4P-1`, `R4P-2O`, `R4P-2C`, `R4P-3`, `R4P-4` | 4x4 rooms with 5 ft doorways, same layouts. Every door is one square in from the left end of its wall going clockwise, so every opening reads `[1, 1]` |
 | `R56-1A` ... `R56-4`, `R57-1A` ... `R57-4` | 5x6 and 5x7 rooms with 5 ft doorways, 9 layouts each. The canonical face stands tall (5 wide, 6 or 7 long), so N and S are the short end walls. `1A`/`1B` 1 door in an end/side; `2A` both ends; `2B` both sides; `2C`/`2D` a corner, the side door right/left of the end door; `3A` both ends and a side; `3B` both sides and an end; `4` all four. Doors are as near the middle as a 5 ft door gets: offset `(length - 1) // 2` from the clockwise start of the wall |
+| `R44-0`, `R45-0`, `R46-0`, `R47-0`, `R48-0`, `R55-0`, `R56-0`, `R57-0`, `R58-0`, `R66-0` | Doorless rooms, for door markers: a solid wall all the way round, so every side's `openings` list is empty. One per size (the digits are the size in squares), matching any room of that size whatever its doors |
 | `H5-S1`, `H5-S4`, `H5-S5` | 5 ft hall, straight, 1, 4 or 5 squares long |
 | `H10-S5` | 10 ft hall, straight, 5 squares long |
 | `H5-L`, `H5-T`, `H5-X`, `H5-D` | 5 ft hall corner, T-junction, crossroads, dead end |
